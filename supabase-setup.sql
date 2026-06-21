@@ -127,6 +127,81 @@ CREATE TABLE IF NOT EXISTS page_sections (
 );
 
 -- =============================================
+-- SCHEMA MIGRATIONS (for existing databases)
+-- Add missing columns to tables if they don't exist (idempotent)
+-- =============================================
+
+DO $$ BEGIN
+  ALTER TABLE public.events ADD COLUMN IF NOT EXISTS is_featured BOOLEAN DEFAULT FALSE;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.events ADD COLUMN IF NOT EXISTS is_published BOOLEAN DEFAULT FALSE;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.announcements ADD COLUMN IF NOT EXISTS is_published BOOLEAN DEFAULT FALSE;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.announcements ADD COLUMN IF NOT EXISTS show_on_home BOOLEAN DEFAULT FALSE;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS hero_subtitle TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS hero_images JSONB DEFAULT '[]'::jsonb;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS whatsapp_url TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS youtube_url TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS tiktok_url TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS about_hero_image TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS about_community_image_1 TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.settings ADD COLUMN IF NOT EXISTS about_community_image_2 TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.page_sections ADD COLUMN IF NOT EXISTS image_url TEXT;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+DO $$ BEGIN
+  ALTER TABLE public.page_sections ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
+EXCEPTION WHEN duplicate_column THEN null;
+END $$;
+
+-- =============================================
 -- INDEXES
 -- Foreign key columns (required for FK lookups and cascade performance)
 -- =============================================
