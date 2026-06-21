@@ -109,7 +109,7 @@ export function Program() {
                   return (
                     <h2
                       key={`month-${item.label}`}
-                      className="font-display font-bold text-2xl text-white capitalize pt-4"
+                      className="font-display font-bold text-2xl text-white capitalize pt-6 pl-8 md:pl-0"
                     >
                       {item.label}
                     </h2>
@@ -129,7 +129,7 @@ export function Program() {
                   >
                     <div className={`relative grid grid-cols-[32px_minmax(0,1fr)] md:grid-cols-[1fr_48px_1fr] gap-4 md:gap-0 items-start`}>
                       <div
-                        className={`absolute left-[12px] md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full ${dotColor(event.status)} z-20 mt-6 ${
+                        className={`absolute left-[12px] -translate-x-1/2 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full ${dotColor(event.status)} z-20 mt-6 ${
                           isEven ? 'md:order-2' : 'md:order-2'
                         }`}
                       />
