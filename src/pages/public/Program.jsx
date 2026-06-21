@@ -101,7 +101,7 @@ export function Program() {
           </div>
         ) : (
           <div className="relative">
-            <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-container via-tertiary to-transparent hidden md:block" />
+            <div className="absolute left-[12px] md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-container via-tertiary to-transparent" />
 
             <div className="space-y-12">
               {timelineItems.map((item, idx) => {
@@ -127,21 +127,21 @@ export function Program() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: eventIndex * 0.05 }}
                   >
-                    <div className={`relative grid grid-cols-[24px_1fr] md:grid-cols-[1fr_48px_1fr] gap-4 md:gap-0 items-center`}>
+                    <div className={`relative grid grid-cols-[32px_minmax(0,1fr)] md:grid-cols-[1fr_48px_1fr] gap-4 md:gap-0 items-start`}>
                       <div
-                        className={`absolute left-[20px] md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full ${dotColor(event.status)} z-20 ${
+                        className={`absolute left-[12px] md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full ${dotColor(event.status)} z-20 mt-6 ${
                           isEven ? 'md:order-2' : 'md:order-2'
                         }`}
                       />
 
                       {isEven ? (
                         <>
-                          <div className="md:col-start-1 md:col-end-2 md:pr-6 md:text-right ml-12 md:ml-0">
-                            <Card glass className="w-full p-6 hover:border-primary/50 transition-all duration-200 hover:scale-[1.02]">
+                          <div className="col-start-2 min-w-0 md:col-start-1 md:col-end-2 md:pr-6 md:text-right">
+                            <Card glass className="w-full min-w-0 p-4 md:p-6 hover:border-primary/50 transition-all duration-200 hover:scale-[1.02]">
                               <span className={`font-label-sm font-semibold mb-2 block ${statusColor(event.status)}`}>
                                 {format(parseISO(event.event_date), "d 'de' MMMM", { locale: es })} · {formatTime(event.event_time)}
                               </span>
-                              <h3 className="font-display font-bold text-xl text-white mb-2">{event.title}</h3>
+                              <h3 className="font-display font-bold text-lg md:text-xl text-white mb-2">{event.title}</h3>
                               <p className="text-on-surface-variant text-sm mb-4 line-clamp-3">{event.description}</p>
                               <div className="flex flex-wrap gap-2 mb-4">
                                 <Badge variant="purple">{event.category}</Badge>
@@ -173,12 +173,12 @@ export function Program() {
                             <EventImage event={event} />
                           </div>
 
-                          <div className="ml-12 md:ml-0 md:col-start-3 md:col-end-4 md:pl-6">
-                            <Card glass className="w-full p-6 hover:border-primary/50 transition-all duration-200 hover:scale-[1.02]">
+                          <div className="col-start-2 min-w-0 md:col-start-3 md:col-end-4 md:pl-6">
+                            <Card glass className="w-full min-w-0 p-4 md:p-6 hover:border-primary/50 transition-all duration-200 hover:scale-[1.02]">
                               <span className={`font-label-sm font-semibold mb-2 block ${statusColor(event.status)}`}>
                                 {format(parseISO(event.event_date), "d 'de' MMMM", { locale: es })} · {formatTime(event.event_time)}
                               </span>
-                              <h3 className="font-display font-bold text-xl text-white mb-2">{event.title}</h3>
+                              <h3 className="font-display font-bold text-lg md:text-xl text-white mb-2">{event.title}</h3>
                               <p className="text-on-surface-variant text-sm mb-4 line-clamp-3">{event.description}</p>
                               <div className="flex flex-wrap gap-2 mb-4">
                                 <Badge variant="purple">{event.category}</Badge>
