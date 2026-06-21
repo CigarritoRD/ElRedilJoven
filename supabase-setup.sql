@@ -170,9 +170,9 @@ SECURITY DEFINER
 SET search_path = ''
 AS $$
   SELECT EXISTS (
-    SELECT 1 FROM profiles
+    SELECT 1 FROM public.profiles
     WHERE id = (SELECT auth.uid())
-      AND role = 'admin'
+      AND role = 'admin'::public.user_role
   );
 $$;
 
@@ -183,9 +183,9 @@ SECURITY DEFINER
 SET search_path = ''
 AS $$
   SELECT EXISTS (
-    SELECT 1 FROM profiles
+    SELECT 1 FROM public.profiles
     WHERE id = (SELECT auth.uid())
-      AND role IN ('admin', 'editor')
+      AND role IN ('admin'::public.user_role, 'editor'::public.user_role)
   );
 $$;
 
