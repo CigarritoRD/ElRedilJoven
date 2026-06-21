@@ -172,7 +172,7 @@ AS $$
   SELECT EXISTS (
     SELECT 1 FROM public.profiles
     WHERE id = (SELECT auth.uid())
-      AND role = 'admin'::public.user_role
+      AND role::text = 'admin'
   );
 $$;
 
@@ -185,7 +185,7 @@ AS $$
   SELECT EXISTS (
     SELECT 1 FROM public.profiles
     WHERE id = (SELECT auth.uid())
-      AND role IN ('admin'::public.user_role, 'editor'::public.user_role)
+      AND role::text IN ('admin', 'editor')
   );
 $$;
 
