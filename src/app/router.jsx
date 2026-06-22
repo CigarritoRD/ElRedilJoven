@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet, ScrollRestoration } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { queryClient } from '../lib/queryClient';
 
@@ -26,142 +26,156 @@ const LoadingFallback = () => (
   </div>
 );
 
+function RootLayout() {
+  return (
+    <>
+      <Outlet />
+      <ScrollRestoration />
+    </>
+  );
+}
+
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Home />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/programa',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Program />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/actividades',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Activities />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/actividades/:id',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <ActivityDetail />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/galeria',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Gallery />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/anuncios',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Announcements />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/nosotros',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <About />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/contacto',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Contact />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/login',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <Login />
-      </Suspense>
-    ),
-  },
-  {
-    path: '/admin',
-    element: (
-      <Suspense fallback={<LoadingFallback />}>
-        <AdminLayout />
-      </Suspense>
-    ),
+    element: <RootLayout />,
     children: [
       {
-        index: true,
+        path: '/',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <Dashboard />
+            <Home />
           </Suspense>
         ),
       },
       {
-        path: 'actividades',
+        path: '/programa',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminActivities />
+            <Program />
           </Suspense>
         ),
       },
       {
-        path: 'programa',
+        path: '/actividades',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminProgram />
+            <Activities />
           </Suspense>
         ),
       },
       {
-        path: 'galeria',
+        path: '/actividades/:id',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminGallery />
+            <ActivityDetail />
           </Suspense>
         ),
       },
       {
-        path: 'anuncios',
+        path: '/galeria',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminAnnouncements />
+            <Gallery />
           </Suspense>
         ),
       },
       {
-        path: 'configuracion',
+        path: '/anuncios',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminSettings />
+            <Announcements />
           </Suspense>
         ),
       },
       {
-        path: 'contenido',
+        path: '/nosotros',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <AdminPageContent />
+            <About />
           </Suspense>
         ),
+      },
+      {
+        path: '/contacto',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Contact />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/login',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <Login />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/admin',
+        element: (
+          <Suspense fallback={<LoadingFallback />}>
+            <AdminLayout />
+          </Suspense>
+        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'actividades',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminActivities />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'programa',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminProgram />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'galeria',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminGallery />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'anuncios',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminAnnouncements />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'configuracion',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminSettings />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'contenido',
+            element: (
+              <Suspense fallback={<LoadingFallback />}>
+                <AdminPageContent />
+              </Suspense>
+            ),
+          },
+        ],
       },
     ],
   },
